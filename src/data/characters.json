@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Ringo",
+        "cardImg": "assets/CharacterCards_01a_Ringo.png",
+        "ultimateCost": 3,
+        "skills": [
+            {
+                "name": "1",
+                "img": "assets/Skills_01a_Ringo.png",
+                "dmg": 2,
+                "heal": 0,
+                "shield": 0
+            },
+            {
+                "name": "2",
+                "img": "assets/Skills_02a_Ringo.png",
+                "dmg": 3,
+                "heal": 0,
+                "shield": 0
+            },
+            {
+                "name": "3",
+                "img": "assets/Skills_03a_Ringo.png",
+                "dmg": 2,
+                "heal": 0,
+                "shield": 0
+            }
+        ]
+    }
+]

@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+img {
+  display: block;
+}
+@font-face {
+  font-family: 'Vg';
+  src: url('assets/Fonts_Philosopher_Regular.ttf');
+}
+@font-face {
+  font-family: 'Vg Bold';
+  src: url('assets/Fonts_Philosopher_Bold.ttf');
+}
