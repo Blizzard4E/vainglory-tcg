@@ -1,4 +1,4 @@
-<img width="300" src="https://github.com/Blizzard4E/vainglory-tcg/blob/main/public/assets/BackCards_02a_Vainglory.png"/>
+<img width="150" src="https://github.com/Blizzard4E/vainglory-tcg/blob/main/public/assets/BackCards_02a_Vainglory.png"/>
 
 # Vainglory The Card Game
 
