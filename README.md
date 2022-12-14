@@ -1,7 +1,8 @@
-# Tauri + Svelte + Typescript
+<img width="150" src="https://github.com/Blizzard4E/vainglory-tcg/blob/main/public/assets/BackCards_02a_Vainglory.png"/>
 
-This template should help get you started developing with Tauri, Svelte and TypeScript in Vite.
+# Vainglory The Card Game
 
-## Recommended IDE Setup
+This is a game inspired by Vainglory and Genius Invokation TCG from Genshin Impact.
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer).
+This card game uses characters, monsters and items from Vainglory as cards and uses mechanics from Genius Invokation TCG. 
+
