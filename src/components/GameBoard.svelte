@@ -15,6 +15,13 @@
             newStatus.player.currentCharacter = 0;
         }
         else newStatus.player.currentCharacter++;
+        newStatus.player.showSwitch = false;
+        gameStatus.update(status => newStatus);
+    }
+
+    function showSwitch() {
+        let newStatus = boardStatus;
+        newStatus.player.showSwitch = true;
         gameStatus.update(status => newStatus);
     }
 
@@ -25,12 +32,18 @@
     <div class="characters">
         <div class="enemy">
             {#each boardStatus.enemy.characters as character, i}
-                <CharacterCard bind:status={boardStatus.enemy.characters[i]} />
+                <button class:active={boardStatus.enemy.currentCharacter == boardStatus.enemy.characters[i].id}>
+                    <CharacterCard bind:status={boardStatus.enemy.characters[i]} />
+                </button>
             {/each}
         </div>
         <div class="player">
             {#each boardStatus.player.characters as character, i}
-                <CharacterCard bind:status={boardStatus.player.characters[i]} />
+                <button on:click={() => {
+                    if(boardStatus.player.currentCharacter != boardStatus.player.characters[i].id) showSwitch()
+                }} class:active={boardStatus.player.currentCharacter == boardStatus.player.characters[i].id}>
+                    <CharacterCard bind:status={boardStatus.player.characters[i]} />
+                </button>
             {/each}
         </div>
     </div>
@@ -39,9 +52,11 @@
         </div>
         <div class="bottom-row">
             <CharacterSkills />
-            <button on:click={() => playerSwitch()} class="switch">
-                <img src="assets/Icons_01a_Switch.svg" alt="">
-            </button>
+            {#if boardStatus.player.showSwitch}
+                <button on:click={() => playerSwitch()} class="switch">
+                    <img src="assets/Icons_01a_Switch.svg" alt="">
+                </button>
+            {/if}
         </div>
     </div>
 </div>
@@ -66,6 +81,20 @@
         display: flex;
         justify-content: space-around;
     }
+    .characters button {
+        background: transparent;
+        padding: 0;
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+    }
+    .player > button.active {
+        transform: translateY(-2rem);
+    }
+    .enemy > button.active {
+        transform: translateY(2rem);
+    }
+
+
     .col-3 {
         display: flex;
         flex-direction: column;
@@ -77,13 +106,28 @@
     }
     .bottom-row > .switch {
         background: transparent;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
     }
     .bottom-row > .switch img{
         width: 50px;
         aspect-ratio: 1/1;
+        filter: invert(72%) sepia(78%) saturate(547%) hue-rotate(0deg) brightness(104%) contrast(103%) drop-shadow(0 0 3px gold);
         border-radius: 50%;
-        border: 3px solid white;
-        filter: invert(97%) sepia(64%) saturate(1625%) hue-rotate(319deg) brightness(102%) contrast(90%);
-        padding: 0.5rem;
+        animation: switchPopUp 0.4s ease-in-out;
+        animation-fill-mode: forwards;
+    }
+    @keyframes switchPopUp {
+        0% { 
+            transform: scale(0.4);
+            opacity: 0;
+        }
+        40% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        100% { 
+        }
     }
 </style>

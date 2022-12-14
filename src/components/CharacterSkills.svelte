@@ -28,7 +28,7 @@
         gameStatus.update(status => newStatus);
     }
 
-    function increaseEnergy(characterId) {
+    function increaseEnergy() {
         let newStatus = boardStatus;
         let playerEnergy = boardStatus.player.characters[boardStatus.player.currentCharacter].energy;
         let maxEnergy = characters[boardStatus.player.currentCharacter].ultimateCost;
@@ -61,6 +61,23 @@
                         setTimeout(() => reduceEnergy(), 500);
                         break;
                 }
+                break;
+            case ADAGIO:
+                switch(skillIndex) { 
+                    case 0: 
+                        doDamageToEnemy(characters[ADAGIO].skills[skillIndex].dmg);
+                        setTimeout(() => increaseEnergy(), 500);
+                        break;
+                    case 1: 
+                        doDamageToEnemy(characters[ADAGIO].skills[skillIndex].dmg);
+                        setTimeout(() => increaseEnergy(), 500);
+                        break;
+                    case 2: 
+                        doDamageToEnemy(characters[ADAGIO].skills[skillIndex].dmg);
+                        setTimeout(() => reduceEnergy(), 500);
+                        break;
+                }
+                break;
         }
     }
 

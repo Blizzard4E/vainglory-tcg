@@ -9,7 +9,6 @@
     charactersData.subscribe(value => {
 		characters = value;
 	});
-
 </script>
 
 <div class="card" use:tilt={{ scale: 1.1, reverse: true }}>
@@ -34,6 +33,7 @@
 
 <style>
     .card {
+        background: none;
         position: relative;
         width: 150px;
         aspect-ratio: 7 / 12;
