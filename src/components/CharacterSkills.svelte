@@ -1,9 +1,11 @@
 <script>
     import { gameStatus } from '../stores';
     import { charactersData } from '../stores';
+    import { summonsData } from '../stores';
 
     let boardStatus;
     let characters;
+    let summons;
 
     gameStatus.subscribe(value => {
 		boardStatus = value;
@@ -13,7 +15,14 @@
 		characters = value;
 	});
 
+    summonsData.subscribe(value => {
+		summons = value;
+	});
+
+    //Characters ID
     const RINGO = 0, ADAGIO = 1;
+    //Summons ID
+    const GIFT_OF_FIRE = 0;
 
     function doDamageToEnemy(dmg){
         let newStatus = boardStatus;
@@ -22,9 +31,7 @@
         if(enemyHP - dmg < 0) {
             newStatus.enemy.characters[boardStatus.enemy.currentCharacter].hp = 0;
         }
-        else {
-            newStatus.enemy.characters[boardStatus.enemy.currentCharacter].hp = enemyHP - dmg;
-        }
+        else newStatus.enemy.characters[boardStatus.enemy.currentCharacter].hp = enemyHP - dmg;
         gameStatus.update(status => newStatus);
     }
 
@@ -37,6 +44,17 @@
         }
         gameStatus.update(status => newStatus);
     }
+
+    function summon(summonID) {
+        let newStatus = boardStatus;
+		switch(summonID) {
+            case GIFT_OF_FIRE:
+                newStatus.player.summons.push(summons[summonID]);
+                break;
+        }
+        console.log(summons[summonID]);
+        gameStatus.update(status => newStatus);
+	}
 
     function reduceEnergy(amount) {
         let newStatus = boardStatus;
@@ -66,6 +84,7 @@
                 switch(skillIndex) { 
                     case 0: 
                         doDamageToEnemy(characters[ADAGIO].skills[skillIndex].dmg);
+                        summon(GIFT_OF_FIRE);
                         setTimeout(() => increaseEnergy(), 500);
                         break;
                     case 1: 
@@ -104,19 +123,18 @@
     }
     .skill {
         background: none;
-        margin: 0 1rem;
+        margin-right: 1rem;
         border-radius: 12px;
-        padding: 0.1rem;
         transition: 0.25s;
         cursor: pointer;
-        box-shadow: 0 0 0 1px gray;
+        box-shadow: 0 0 0 4px gray;
         filter: brightness(0.7);
     }
     .usable {
         filter: brightness(1);
     }
     .usable:hover {
-        box-shadow: 0 0 0 1px gold;
+        box-shadow: 0 0 0 2px #F2C94C;
     }
     .skill img {
         display: block;

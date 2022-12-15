@@ -1,5 +1,6 @@
 <script>
-    import {gameStatus} from '../stores'
+    import GiftOfFire from '../summons/GiftOfFire.svelte';
+import {gameStatus} from '../stores'
     import CharacterCard from './CharacterCard.svelte'
     import CharacterSkills from './CharacterSkills.svelte';
 
@@ -25,6 +26,8 @@
         gameStatus.update(status => newStatus);
     }
 
+    //Summons ID
+    const GIFT_OF_FIRE = 0;
 </script>
 
 <div class="board">
@@ -50,11 +53,21 @@
     <div class="col-3">
         <div class="points">
         </div>
+        <div class="summons">
+            <div class="enemy"></div>
+            {#if boardStatus.player.summons.length > 0}
+                <div class="player">
+                    {#if boardStatus.player.summons.some(summon => summon.id === GIFT_OF_FIRE)}
+                        <GiftOfFire />
+                    {/if}
+                </div>
+            {/if}
+        </div>
         <div class="bottom-row">
             <CharacterSkills />
             {#if boardStatus.player.showSwitch}
                 <button on:click={() => playerSwitch()} class="switch">
-                    <img src="assets/Icons_01a_Switch.svg" alt="">
+                    <img class="main-img" src="assets/Icons_01a_Switch.svg" alt="">
                 </button>
             {/if}
         </div>
@@ -63,23 +76,27 @@
 
 <style>
     .board {
-        width: 1400px;
+        width: 1440px;
         height: 700px;
         display: grid;
         grid-template-columns: 25% 50% 25%; 
-        color: red;
         padding: 1rem 0;
+        background: #4F4F4F;
     }
 
     .characters {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background: #4F4F4F;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
     }
     .characters > div {
         display: flex;
         justify-content: space-around;
+    }
+    .characters > .enemy {
+        align-items: flex-start;
+    }
+    .characters > .player {
+        align-items: flex-end;
     }
     .characters button {
         background: transparent;
@@ -87,19 +104,29 @@
         transition: 0.3s ease-in-out;
         cursor: pointer;
     }
-    .player > button.active {
+    .characters .player > button.active {
         transform: translateY(-2rem);
     }
-    .enemy > button.active {
+    .characters .enemy > button.active {
         transform: translateY(2rem);
     }
 
 
     .col-3 {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        display: grid;
+        grid-template-rows: 1fr 6fr 1fr;
     }
+
+    .summons {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+    }
+    .summons .player {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: flex-start;
+    }
+
     .bottom-row {
         display: flex;
         align-items: center;
