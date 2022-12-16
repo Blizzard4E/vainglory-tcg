@@ -30,7 +30,7 @@ export const gameStatus = writable({
 			{
 				id: 0,
 				hp: 10,
-				energy: 0,
+				energy: 2,
 				stack: 0
 			},
 			{
@@ -69,7 +69,7 @@ export const charactersData = readable([
 			{
 				name: "3",
 				img: "assets/Skills_03a_Ringo.png",
-				dmg: 5,
+				dmg: 8,
 				heal: 0,
 				shield: 0
 			}

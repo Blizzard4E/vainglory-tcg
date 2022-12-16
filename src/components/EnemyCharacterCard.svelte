@@ -1,27 +1,36 @@
 <script>
     import { charactersData } from '../stores';
+    import { gameStatus } from '../stores';
     import tilt from '../lib/tilt';
 
-    export let status;
+    export let index;
 
+    let boardStatus;
     let characters;
 
     charactersData.subscribe(value => {
 		characters = value;
 	});
+
+    gameStatus.subscribe(value => {
+		boardStatus = value;
+        console.log(boardStatus.enemy.characters);
+	});
+
+
 </script>
 
 <div class="card" use:tilt={{ scale: 1.1, reverse: true }}>
-    <img src={characters[status.id].cardImg} alt="">
+    <img src={characters[boardStatus.enemy.characters[index].id].cardImg} alt="">
     <img src="assets/CardFrames_01b_Gold.png" alt="">
     <div class="hp">
-        <h1>{status.hp}</h1>
+        <h1>{boardStatus.enemy.characters[index].hp}</h1>
         <img src="assets/CardAttributes_01a_Health.png" alt="">
     </div>
     <div class="energy">
-        {#each {length: characters[status.id].ultimateCost} as _, i}
+        {#each {length: characters[boardStatus.enemy.characters[index].id].ultimateCost} as _, i}
             <div class="energy-slot">
-                {#if i < status.energy}
+                {#if i < boardStatus.enemy.characters[index].energy}
                     <img src="assets/CardAttributes_02a_Energy.png" alt="">
                 {:else}
                     <img class="empty" src="assets/CardAttributes_02b_Energy.png" alt="">
@@ -30,6 +39,7 @@
         {/each}
     </div>
 </div>
+<div id={"effect-enemy-" + index} class="character-card-effect"></div>
 
 <style>
     .card {

@@ -1,8 +1,9 @@
 <script>
     import GiftOfFire from '../summons/GiftOfFire.svelte';
-import {gameStatus} from '../stores'
-    import CharacterCard from './CharacterCard.svelte'
+    import {gameStatus} from '../stores'
+    import PlayerCharacterCard from './PlayerCharacterCard.svelte'
     import CharacterSkills from './CharacterSkills.svelte';
+    import EnemyCharacterCard from './EnemyCharacterCard.svelte';
 
     let boardStatus;
 
@@ -35,17 +36,17 @@ import {gameStatus} from '../stores'
     <div class="characters">
         <div class="enemy">
             {#each boardStatus.enemy.characters as character, i}
-                <button class:active={boardStatus.enemy.currentCharacter == boardStatus.enemy.characters[i].id}>
-                    <CharacterCard bind:status={boardStatus.enemy.characters[i]} />
+                <button id={"enemy-character-" + i} class:active={boardStatus.enemy.currentCharacter == boardStatus.enemy.characters[i].id}>
+                    <EnemyCharacterCard index={i} />
                 </button>
             {/each}
         </div>
         <div class="player">
             {#each boardStatus.player.characters as character, i}
-                <button on:click={() => {
+                <button id={"player-character-" + i} on:click={() => {
                     if(boardStatus.player.currentCharacter != boardStatus.player.characters[i].id) showSwitch()
                 }} class:active={boardStatus.player.currentCharacter == boardStatus.player.characters[i].id}>
-                    <CharacterCard bind:status={boardStatus.player.characters[i]} />
+                    <PlayerCharacterCard index={i} />
                 </button>
             {/each}
         </div>
@@ -82,6 +83,7 @@ import {gameStatus} from '../stores'
         grid-template-columns: 25% 50% 25%; 
         padding: 1rem 0;
         background: #4F4F4F;
+        overflow: hidden;
     }
 
     .characters {

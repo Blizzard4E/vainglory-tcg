@@ -52,7 +52,6 @@
                 newStatus.player.summons.push(summons[summonID]);
                 break;
         }
-        console.log(summons[summonID]);
         gameStatus.update(status => newStatus);
 	}
 
@@ -67,16 +66,103 @@
             case RINGO:
                 switch(skillIndex) { 
                     case 0: 
-                        doDamageToEnemy(characters[RINGO].skills[skillIndex].dmg);
-                        setTimeout(() => increaseEnergy(), 500);
+                        let audio1 = new Audio('assets/Sounds_01a_Ringo.mp3');
+                        audio1.volume = 0.4;
+                        audio1.play();
+                        setTimeout(() => {
+                            document.getElementById("effect-player-" + boardStatus.player.currentCharacter).innerHTML += "<div id='ringo-bullet' class='ringo-bullet ringo-bullet-" + boardStatus.enemy.currentCharacter +"-" + boardStatus.enemy.currentCharacter + "'><img src='assets/Sprite_01a_Ringo.png' /></div>";
+                            setTimeout(() => {
+                                document.getElementById("ringo-bullet").remove();
+                                document.getElementById("effect-enemy-" + boardStatus.enemy.currentCharacter).innerHTML += "<div id='ringo-flash' class='ringo-flash'><img id='ringo-flash-img'  src='assets/Sprite_02a_Ringo.png' /></div>";
+                                let random = Math.random() * (360 - 0 + 1) + 0;
+                                document.getElementById("ringo-flash-img").style.transform = "rotateZ(" + random + "deg)";
+                                doDamageToEnemy(characters[RINGO].skills[skillIndex].dmg);
+                                increaseEnergy();
+                                setTimeout(() => {
+                                    document.getElementById("ringo-flash").remove();
+                                }, 200);
+                            }, 250);
+                        }, 100);
                         break;
                     case 1: 
-                        doDamageToEnemy(characters[RINGO].skills[skillIndex].dmg);
-                        setTimeout(() => increaseEnergy(), 500);
+                        let audio2 = new Audio('assets/Sounds_02a_Ringo.mp3');
+                        audio2.volume = 0.5;
+                        audio2.play();
+                        setTimeout(() => {
+                            document.getElementById("effect-player-" + boardStatus.player.currentCharacter).innerHTML += "<div id='ringo-bullet' class='ringo-bullet ringo-bullet-" + boardStatus.enemy.currentCharacter +"-" + boardStatus.enemy.currentCharacter + "'><img src='assets/Sprite_01a_Ringo.png' /></div>";
+                            setTimeout(() => {
+                                document.getElementById("ringo-bullet").remove();
+                                document.getElementById("effect-enemy-" + boardStatus.enemy.currentCharacter).innerHTML += "<div id='ringo-flash' class='ringo-flash'><img id='ringo-flash-img'  src='assets/Sprite_02a_Ringo.png' /></div>";
+                                let random = Math.random() * (360 - 0 + 1) + 0;
+                                document.getElementById("ringo-flash-img").style.transform = "rotateZ(" + random + "deg)";
+                                doDamageToEnemy(characters[RINGO].skills[skillIndex].dmg);
+                                setTimeout(() => {
+                                    document.getElementById("ringo-flash").remove();
+                                }, 200);
+                            }, 250);
+                        }, 400);
+                        setTimeout(() => {
+                            document.getElementById("effect-player-" + boardStatus.player.currentCharacter).innerHTML += "<div id='ringo-bullet' class='ringo-bullet ringo-bullet-" + boardStatus.enemy.currentCharacter +"-" + boardStatus.enemy.currentCharacter + "'><img src='assets/Sprite_01a_Ringo.png' /></div>";
+                            setTimeout(() => {
+                                document.getElementById("ringo-bullet").remove();
+                                document.getElementById("effect-enemy-" + boardStatus.enemy.currentCharacter).innerHTML += "<div id='ringo-flash' class='ringo-flash'><img id='ringo-flash-img'  src='assets/Sprite_02a_Ringo.png' /></div>";
+                                let random = Math.random() * (360 - 0 + 1) + 0;
+                                document.getElementById("ringo-flash-img").style.transform = "rotateZ(" + random + "deg)";
+                                doDamageToEnemy(characters[RINGO].skills[skillIndex].dmg);
+                                setTimeout(() => {
+                                    document.getElementById("ringo-flash").remove();
+                                }, 200);
+                            }, 250);
+                        }, 1000);
+                        setTimeout(() => {
+                            document.getElementById("effect-player-" + boardStatus.player.currentCharacter).innerHTML += "<div id='ringo-bullet' class='ringo-bullet ringo-bullet-" + boardStatus.enemy.currentCharacter +"-" + boardStatus.enemy.currentCharacter + "'><img src='assets/Sprite_01a_Ringo.png' /></div>";
+                            setTimeout(() => {
+                                document.getElementById("ringo-bullet").remove();
+                                document.getElementById("effect-enemy-" + boardStatus.enemy.currentCharacter).innerHTML += "<div id='ringo-flash' class='ringo-flash'><img id='ringo-flash-img'  src='assets/Sprite_02a_Ringo.png' /></div>";
+                                let random = Math.random() * (360 - 0 + 1) + 0;
+                                document.getElementById("ringo-flash-img").style.transform = "rotateZ(" + random + "deg)";
+                                doDamageToEnemy(characters[RINGO].skills[skillIndex].dmg);
+                                setTimeout(() => {
+                                    document.getElementById("ringo-flash").remove();
+                                }, 200);
+                            }, 250);
+                        }, 1800);
+                        setTimeout(() => {
+                            document.getElementById("effect-player-" + boardStatus.player.currentCharacter).innerHTML += "<div id='ringo-bullet' class='ringo-bullet ringo-bullet-" + boardStatus.enemy.currentCharacter +"-" + boardStatus.enemy.currentCharacter + "'><img src='assets/Sprite_01a_Ringo.png' /></div>";
+                            setTimeout(() => {
+                                document.getElementById("ringo-bullet").remove();
+                                document.getElementById("effect-enemy-" + boardStatus.enemy.currentCharacter).innerHTML += "<div id='ringo-flash' class='ringo-flash'><img id='ringo-flash-img'  src='assets/Sprite_02a_Ringo.png' /></div>";
+                                let random = Math.random() * (360 - 0 + 1) + 0;
+                                document.getElementById("ringo-flash-img").style.transform = "rotateZ(" + random + "deg)";
+                                doDamageToEnemy(characters[RINGO].skills[skillIndex].dmg);
+                                increaseEnergy();
+                                setTimeout(() => {
+                                    document.getElementById("ringo-flash").remove();
+                                }, 200);
+                            }, 250);
+                        }, 2200);
                         break;
                     case 2: 
-                        doDamageToEnemy(characters[RINGO].skills[skillIndex].dmg);
-                        setTimeout(() => reduceEnergy(), 500);
+                        let audio3 = new Audio('assets/Sounds_03a_Ringo.mp3');
+                        audio3.volume = 0.5;
+                        audio3.play();
+                        setTimeout(() => {
+                            document.getElementById("effect-player-" + boardStatus.player.currentCharacter).innerHTML += "<div id='ringo-ult' class='ringo-ult ringo-ult-" + boardStatus.enemy.currentCharacter +"-" + boardStatus.enemy.currentCharacter + "'><img src='assets/Sprite_03a_Ringo.png' /></div><div id='ringo-flask' class='ringo-flask'><img src='assets/Sprite_04a_Ringo.png' /></div>";
+                            setTimeout(() => {
+                                document.getElementById("ringo-ult").remove();
+                                document.getElementById("ringo-flask").remove();
+                            }, 2900);
+                            setTimeout(() => {
+                                document.getElementById("effect-enemy-" + boardStatus.enemy.currentCharacter).innerHTML += "<div id='ringo-explosion' class='ringo-explosion'><img id='ringo-explosion-img'  src='assets/Gif_01a_Ringo.gif' /></div>";
+                                let random = Math.random() * (360 - 0 + 1) + 0;
+                                document.getElementById("ringo-explosion-img").style.transform = "rotateZ(" + random + "deg)";
+                                doDamageToEnemy(characters[RINGO].skills[skillIndex].dmg);
+                                reduceEnergy(3);
+                                setTimeout(() => {
+                                    document.getElementById("ringo-explosion").remove();
+                                }, 1200);
+                            }, 2800)
+                        }, 300)
                         break;
                 }
                 break;
