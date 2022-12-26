@@ -18,6 +18,23 @@ img {
     src: url('assets/Fonts_Philosopher_Bold.ttf');
 }
 
+.shake {
+    animation: shake 0.5s;
+}
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
 .character-card-effects {
     position: absolute;
     top: 0;
@@ -26,35 +43,23 @@ img {
 }
 
 .ringo-bullet {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     z-index: 2;
-    transform: translate(2rem, 4rem) scale(1);
+    transform: translate(2rem, 4rem);
 }
 .ringo-bullet img{
     width: 80px;
     transform: rotateZ(-90deg);
 }
-.ringo-bullet-0-0 {
-    animation: ringoBullet-0-0 0.25s ease-in-out;
+
+.ringo-bullet {
+    animation: ringoBullet-0-1 0.25s ease-in-out;
     animation-fill-mode: forwards;
 }
-@keyframes ringoBullet-0-0 {
-    0% { 
-        transform: translate(2rem, 4rem) scale(0.7);
-        opacity: 0.3;
-    }
-    30% {
-        opacity: 1;
-    }
-    100% { 
-        transform: translate(2rem, -14rem) scale(1);
-    }
-}
-
 .ringo-flash {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     z-index: 2;
@@ -62,81 +67,38 @@ img {
 }
 .ringo-flash img{
     width: 80px;
-    animation: ringoFlash 0.15s ease-out;
-    animation-fill-mode: forwards;
 }
-@keyframes ringoFlash {
-    0% { 
-        opacity: 1;
-    }
-    100% { 
-        opacity: 0;
-        transform: scale(0);
-    }
-}
-
 .ringo-ult {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    z-index: 2;
-    transform: translate(-8rem, 4rem) rotate(-45deg) scale(0.3);
-    opacity: 0.7;
-
+    z-index: 3;
+    transform: translate(-8rem, 4rem) rotate(-45deg) scale(0.01);
+    animation: ringoUlt 1.7s linear;
+    animation-fill-mode: forwards;
 }
 .ringo-ult img{
     width: 300px;
     transform: rotateZ(-90deg) scaleX(-1);
-    animation: ringoUltSummon 1.7s ease-in-out;
-    animation-fill-mode: forwards;
 }
-.ringo-ult-0-0 {
-    animation: ringoUlt-0-0 1.7s linear 1.2s;
-    animation-fill-mode: forwards;
-}
-@keyframes ringoUltSummon {
+@keyframes ringoUlt {
     0% { 
-        opacity: 0;
-    }
-    40% {
-        opacity: 1;
-        filter: brightness(1.4) drop-shadow(0 0 20px rgb(255, 94, 0));
-    }
-    100% {
-        opacity: 1;
-        filter: brightness(1) drop-shadow(0);
-    }
-}
-@keyframes ringoUlt-0-0 {
-    0% { 
-        transform: translate(-5rem, 5rem) rotate(-45deg) scale(0.5);
         filter: brightness(1.1) drop-shadow(0 0 20px rgb(255, 94, 0));
-        opacity: 0.7;
     }
     20% {
-        transform: translate(-14rem, -5rem) rotate(-10deg) scale(0.8);
         filter: brightness(1.3) drop-shadow(0 0 20px rgb(255, 94, 0));
-        opacity: 0.9;
     }
     40% {
-        transform: translate(-19rem, -9rem) rotate(0deg) scale(1.2);
-        filter: brightness(1.4) drop-shadow(0 0 20px rgb(255, 94, 0));
-        opacity: 1;
+        filter: brightness(1.6) drop-shadow(0 0 20px rgb(255, 94, 0));
     }
     70% {
-        transform: translate(-20rem, -10rem) rotate(10deg) scale(1.4);
-        filter: brightness(2) drop-shadow(0 0 60px rgb(255, 94, 0));
-        opacity: 1;
+        filter: brightness(2.3) drop-shadow(0 0 60px rgb(255, 94, 0));
     }
     80% {
-        transform: translate(-19rem, -11rem) rotate(25deg) scale(1.2);
-        filter: brightness(1.7) drop-shadow(0 0 35px rgb(255, 94, 0));
-        opacity: 1;
+        filter: brightness(1.8) drop-shadow(0 0 35px rgb(255, 94, 0));
     }
     100% { 
-        transform: translate(-8rem, -18rem) rotate(45deg) scale(1.1);
-        filter: brightness(1.5) drop-shadow(0 0 20px rgb(255, 94, 0));
-        opacity: 1;
+        filter: brightness(1.8) drop-shadow(0 0 20px rgb(255, 94, 0));
     }
 }
 
@@ -148,6 +110,7 @@ img {
     transform: translate( 0, 9rem) rotate(-45deg);
     animation: ringoFlask 3s ease-in-out;
     animation-fill-mode: forwards;
+    z-index: 2;
 }
 @keyframes ringoFlask {
     0% { opacity: 1; }
@@ -156,13 +119,59 @@ img {
 }
 
 .ringo-explosion {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     z-index: 2;
-    transform: translate(-5rem, -1rem) scale(1);
+    transform: translate(-6.5rem, -3rem) scale(1);
     filter: contrast(2) drop-shadow(0 0 40px rgb(255, 94, 0));
 }
 .ringo-explosion img{
-    width: 300px;
+    width: 350px;
+}
+
+#ringo-fire-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(0.25rem , 9.25rem);
+    animation: ringoFireRing 3s ease-in-out;
+    animation-fill-mode: forwards;
+    z-index: 2;
+}
+#ringo-fire-ring img {
+    width: 50px;
+    filter: brightness(1.2) drop-shadow(0 0 20px rgb(255, 94, 0));
+}
+@keyframes ringoFireRing {
+    0% { 
+        opacity: 0; 
+        transform: translate(1rem , 10rem) scale(1) rotateZ(-360deg);
+    }
+    20% {
+        opacity: 0.8;
+    }
+    50% { 
+        opacity: 1;
+        transform: translate(1rem , 10rem) scale(1.5) rotateZ(360deg);
+        filter: drop-shadow(0 0 40px rgb(255, 94, 0));
+    }
+    70% {
+        opacity: 1;
+    }
+    100% { 
+        opacity: 0;
+        transform: translate(1rem , 10rem) scale(1) rotateZ(360deg);
+    }
+}
+
+#dragon-trails {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+.dragon-trails {
+    width: 160px;
+    position: absolute;
 }

@@ -18,26 +18,28 @@
 	});
 </script>
 
-<div class="card" use:tilt={{ scale: 1.1, reverse: true }}>
-    <img src={characters[boardStatus.player.characters[index].id].cardImg} alt="">
-    <img src="assets/CardFrames_01b_Gold.png" alt="">
-    <div class="hp">
-        <h1>{boardStatus.player.characters[index].hp}</h1>
-        <img src="assets/CardAttributes_01a_Health.png" alt="">
+<div style="position: relative;">
+    <div class="card" use:tilt={{ scale: 1.1, reverse: true }}>
+        <img src={characters[boardStatus.player.characters[index].id].cardImg} alt="">
+        <img src="assets/CardFrames_01b_Gold.png" alt="">
+        <div class="hp">
+            <h1>{boardStatus.player.characters[index].hp}</h1>
+            <img src="assets/CardAttributes_01a_Health.png" alt="">
+        </div>
+        <div class="energy">
+            {#each {length: characters[boardStatus.player.characters[index].id].ultimateCost} as _, i}
+                <div class="energy-slot">
+                    {#if i < boardStatus.player.characters[index].energy}
+                        <img src="assets/CardAttributes_02a_Energy.png" alt="">
+                    {:else}
+                        <img class="empty" src="assets/CardAttributes_02b_Energy.png" alt="">
+                    {/if}
+                </div>
+            {/each}
+        </div>
     </div>
-    <div class="energy">
-        {#each {length: characters[boardStatus.player.characters[index].id].ultimateCost} as _, i}
-            <div class="energy-slot">
-                {#if i < boardStatus.player.characters[index].energy}
-                    <img src="assets/CardAttributes_02a_Energy.png" alt="">
-                {:else}
-                    <img class="empty" src="assets/CardAttributes_02b_Energy.png" alt="">
-                {/if}
-            </div>
-        {/each}
-    </div>
+    <div id={"effect-player-" + index} class="character-card-effects"></div>
 </div>
-<div id={"effect-player-" + index} class="character-card-effects"></div>
 
 <style>
     .card {

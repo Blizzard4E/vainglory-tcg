@@ -6,33 +6,44 @@
     import EnemyCharacterCard from './EnemyCharacterCard.svelte';
 
     let boardStatus;
+    let selectedCharacter = null;
 
     gameStatus.subscribe(value => {
 		boardStatus = value;
 	});
 
+    function selectCharacter(index) {
+        selectedCharacter = index;
+    }
+
     function playerSwitch() {
         let newStatus = boardStatus;
-        if(boardStatus.player.currentCharacter == boardStatus.player.characters.length - 1) {
-            newStatus.player.currentCharacter = 0;
-        }
-        else newStatus.player.currentCharacter++;
-        newStatus.player.showSwitch = false;
-        gameStatus.update(status => newStatus);
+        newStatus.player.currentCharacter = selectedCharacter;
+        newStatus.player.canSwitch = false;
+        selectedCharacter = null;
+        gameStatus.update(status => newStatus); 
     }
 
-    function showSwitch() {
+    function allowSwitch() {
         let newStatus = boardStatus;
-        newStatus.player.showSwitch = true;
+        newStatus.player.canSwitch = true;
         gameStatus.update(status => newStatus);
     }
 
+    function swapEnemy() {
+        let newStatus = boardStatus;
+        if(boardStatus.enemy.currentCharacter + 1 > 2) newStatus.enemy.currentCharacter = 0;
+        else newStatus.enemy.currentCharacter++;
+        gameStatus.update(status => newStatus);
+    }
     //Summons ID
     const GIFT_OF_FIRE = 0;
 </script>
 
-<div class="board">
-    <div></div>
+<div id="board">
+    <div class="bottom-row"><button on:click={() => swapEnemy()} class="switch">
+        <img class="main-img" src="assets/Icons_01a_Switch.svg" alt="">
+    </button></div>
     <div class="characters">
         <div class="enemy">
             {#each boardStatus.enemy.characters as character, i}
@@ -44,7 +55,15 @@
         <div class="player">
             {#each boardStatus.player.characters as character, i}
                 <button id={"player-character-" + i} on:click={() => {
-                    if(boardStatus.player.currentCharacter != boardStatus.player.characters[i].id) showSwitch()
+                    console.log(i);
+                    if(boardStatus.player.currentCharacter != i) {
+                        if(boardStatus.player.canSwitch) {{
+                            selectCharacter(i);
+                        }}
+                        else {
+                            allowSwitch();
+                        }
+                    } 
                 }} class:active={boardStatus.player.currentCharacter == boardStatus.player.characters[i].id}>
                     <PlayerCharacterCard index={i} />
                 </button>
@@ -66,8 +85,12 @@
         </div>
         <div class="bottom-row">
             <CharacterSkills />
-            {#if boardStatus.player.showSwitch}
-                <button on:click={() => playerSwitch()} class="switch">
+            {#if boardStatus.player.canSwitch}
+                <button on:click={() => {
+                    if(selectedCharacter != null) {
+                        playerSwitch();
+                    }
+                }} class="switch">
                     <img class="main-img" src="assets/Icons_01a_Switch.svg" alt="">
                 </button>
             {/if}
@@ -76,7 +99,8 @@
 </div>
 
 <style>
-    .board {
+    #board {
+        padding: 2rem;
         width: 1440px;
         height: 700px;
         display: grid;

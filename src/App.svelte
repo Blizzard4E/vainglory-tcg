@@ -13,5 +13,6 @@
         background: #333333;
         display: grid;
         place-items: center;
+        overflow: hidden;
     }
 </style>
