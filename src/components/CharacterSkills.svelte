@@ -67,12 +67,20 @@
             document.getElementById("board").classList.remove('shake');
         }, 500);
     }
+ 
+    function turnOffInput(duration) {
+        document.getElementById("board").style.pointerEvents = "none";
+        setTimeout(() => {
+            document.getElementById("board").style.pointerEvents = "auto";
+        }, duration);
+    }
 
     function useSkill(skillIndex) {
         switch(boardStatus.player.currentCharacter){
             case RINGO:
                 switch(skillIndex) { 
                     case 0: 
+                        turnOffInput(400);
                         let audio1 = new Audio('assets/Sounds_01a_Ringo.mp3');
                         audio1.volume = 0.4;
                         audio1.play();
@@ -121,6 +129,7 @@
                         }, 100);
                         break;
                     case 1: 
+                        turnOffInput(2500);
                         let audio2 = new Audio('assets/Sounds_02a_Ringo.mp3');
                         audio2.volume = 0.5;
                         audio2.play();
@@ -291,7 +300,8 @@
                             }, 250);
                         }, 2200);
                         break;
-                    case 2: 
+                    case 2:
+                        turnOffInput(4300);
                         let audio3 = new Audio('assets/Sounds_03a_Ringo.mp3');
                         audio3.volume = 0.5;
                         audio3.play();
@@ -378,7 +388,7 @@
                                 setTimeout(() => {
                                     shakeScreen();
                                 }, 125); 
-                                setTimeout(() => {smokeTrails
+                                setTimeout(() => {
                                     document.getElementById("ringo-explosion").remove();
                                 }, 1200);
                             }, 2800)
@@ -428,11 +438,11 @@
 <div class="skills">
     {#each characters[boardStatus.player.currentCharacter].skills as skill, i}
     {#if i == characters[boardStatus.player.currentCharacter].skills.length - 1}
-        <button class="skill" class:usable={boardStatus.player.characters[boardStatus.player.currentCharacter].energy == characters[boardStatus.player.currentCharacter].ultimateCost} on:click={() => useSkill(i)}>
+        <button class="skill" class:usable={boardStatus.player.characters[boardStatus.player.currentCharacter].energy == characters[boardStatus.player.currentCharacter].ultimateCost} disabled={boardStatus.player.characters[boardStatus.player.currentCharacter].energy != characters[boardStatus.player.currentCharacter].ultimateCost} on:click={() => useSkill(i)} >
             <img src={skill.img} alt="">
         </button>
     {:else}
-        <button class="skill" class:usable={true} on:click={() => useSkill(i)}>
+        <button class="skill usable" on:click={() => useSkill(i)}>
             <img src={skill.img} alt="">
         </button>
     {/if}

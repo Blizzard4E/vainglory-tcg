@@ -36,6 +36,10 @@
         else newStatus.enemy.currentCharacter++;
         gameStatus.update(status => newStatus);
     }
+
+    function endRound() {
+        
+    }
     //Summons ID
     const GIFT_OF_FIRE = 0;
 </script>
@@ -100,6 +104,7 @@
 
 <style>
     #board {
+        user-select: none;
         padding: 2rem;
         width: 1440px;
         height: 700px;

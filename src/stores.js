@@ -2,6 +2,7 @@ import { readable, writable } from 'svelte/store';
 
 export const gameStatus = writable({
 	turn: 0,
+	round: 0,
 	enemy: {
 		currentCharacter: 0,
 		buffs: [],
